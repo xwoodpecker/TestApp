@@ -1,16 +1,17 @@
 package com.javainuse;
 
+import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.util.List;
 
+@Api(tags = {SpringFoxConfig.USER})
 @RestController
 @RequestMapping(path = "/users")
-//@Tag(name = "User management", description = "Endpoint to manage users")
 public class UserRestController {
     private UserRepository userRepository;
 
