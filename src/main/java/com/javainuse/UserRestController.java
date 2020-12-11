@@ -1,4 +1,4 @@
-/**package com.javainuse;
+package com.javainuse;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -24,6 +25,10 @@ public class UserRestController {
     @Operation(summary = "Get all users")
     @GetMapping("/")
     public ResponseEntity<List<User>> getUsers(){
-        return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
+        List<User> list = new ArrayList<>();
+        User user = new User();
+        user.setUserName("Karl");
+        list.add(user);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
-}**/
+}
