@@ -67,8 +67,8 @@ public class UserRestController {
 
 
     @Operation(summary = "Delete a user")
-    @DeleteMapping("/")
-    public ResponseEntity addUser(@PathVariable Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteUser(@PathVariable Long id) {
         userRepository.deleteById(id);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
