@@ -1,7 +1,10 @@
 package com.javainuse;
 
+
+import javax.persistence.*;
 import java.security.Principal;
 
+@Entity
 public class User implements Principal {
 
     private String name;
