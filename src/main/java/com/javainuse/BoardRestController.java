@@ -23,14 +23,4 @@ public class BoardRestController {
 
     }
 
-    @Operation(summary = "Get all users")
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<Board> getBoard(@PathVariable Long id){
-        ResponseEntity<Board> response;
-        Board board = boardRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(id));
-
-        return new ResponseEntity<>(board, HttpStatus.OK);
-    }
-
 }
