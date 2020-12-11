@@ -11,7 +11,8 @@ import springfox.documentation.spring.web.plugins.Docket;
 @Configuration
 public class SpringFoxConfig {
 
-    public static final String USER = "User";
+    public static final String USER = "Users";
+    public static final String BOARD = "Boards";
 
     @Bean
     public Docket api() {
@@ -20,6 +21,7 @@ public class SpringFoxConfig {
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build()
-                .tags(new Tag(USER, "Endpoint to manage users"));
+                .tags(new Tag(USER, "Endpoint to manage users"),
+                        new Tag(BOARD, "Endpoint to manage boards"));
     }
 }

@@ -1,5 +1,6 @@
 package com.javainuse;
 
+import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Api(tags = {SpringFoxConfig.BOARD})
 @RestController
 @RequestMapping(path = "/boards")
 public class BoardRestController {
