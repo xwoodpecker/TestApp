@@ -1,4 +1,4 @@
-package com.javainuse;
+/**package com.javainuse;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,4 +17,4 @@ public class SpringFoxConfig {
                 .paths(PathSelectors.any())
                 .build();
     }
-}
+}**/

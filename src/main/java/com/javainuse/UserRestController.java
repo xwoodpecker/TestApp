@@ -1,4 +1,4 @@
-package com.javainuse;
+/**package com.javainuse;
 
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
@@ -16,11 +16,6 @@ import java.util.List;
 public class UserRestController {
     private UserRepository userRepository;
 
-    /**
-     * Instantiates a new User RestController.
-     *
-     * @param userRepository            the user repository
-     */
     public UserRestController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -31,4 +26,4 @@ public class UserRestController {
     public ResponseEntity<List<User>> getUsers(){
         return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
     }
-}
+}**/
