@@ -3,6 +3,8 @@ package com.javainuse;
 
 import javax.persistence.*;
 import java.security.Principal;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * The type User.
@@ -31,6 +33,9 @@ public class User {//implements Principal {
     @Column(name = "is_supervisor")
     private Boolean isSupervisor;
 
+    @JoinTable(name = "USER_BOARDS")
+    @OneToMany(fetch=FetchType.EAGER)
+    private Set<Board> boards  = new HashSet<>();
 
     /**
      * Default constructor for JPA only.
@@ -148,12 +153,39 @@ public class User {//implements Principal {
     }
 
     /**
-     * Sets userName.
+     * Gets boards.
      *
-     * @param userName the userName
+     * @return the boards
      */
-    public void setName(String userName) {
-        this.userName = userName;
+    public Set<Board> getBoards() {
+        return boards;
+    }
+
+    /**
+     * Sets boards.
+     *
+     * @param boards the boards
+     */
+    public void setBoards(Set<Board> boards) {
+        this.boards = boards;
+    }
+
+    /**
+     * Add to boards.
+     *
+     * @param board the board
+     */
+    public void addToBoards(Board board) {
+        this.boards.add(board);
+    }
+
+    /**
+     * Remove from boards.
+     *
+     * @param board the board
+     */
+    public void removeFromBoards(Board board) {
+        this.boards.remove(board);
     }
 
     @Override
