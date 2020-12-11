@@ -5,12 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import io.swagger.v3.oas.annotations.tags.Tag;
-
-import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "/users")
-//@Tag(name = "User management", description = "Endpoint to manage users")
+@Tag(name = "Sensor Management", description = "Endpoint to manage sensors")
 public class UserRestController {
     private UserRepository userRepository;
 
@@ -19,20 +18,59 @@ public class UserRestController {
     }
 
     @Operation(summary = "Get all users")
-    @GetMapping(path = "/")
-    public ResponseEntity<List<User>> getUsers(){
+    @GetMapping("/")
+    public ResponseEntity getUsers(){
         return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
     }
 
     @Operation(summary = "Get all users")
-    @GetMapping(path = "/{id}")
-    public ResponseEntity<User> getUser(@PathVariable Long id){
-        ResponseEntity<User> response;
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException(id));
+    @GetMapping("/{id}")
+    public ResponseEntity getUser(@PathVariable Long id) {
+        ResponseEntity response;
+        Optional<User> user = userRepository.findById(id);
 
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        if(user.isPresent())
+            response = new ResponseEntity<>(user.get(), HttpStatus.OK);
+        else
+            response = ResponseEntity.status(HttpStatus.NOT_FOUND).body("No User found");
+
+        return response;
     }
 
+    @Operation(summary = "Add a new user")
+    @PostMapping("/")
+    public ResponseEntity addUser(@RequestBody User newUser) {
+        return new ResponseEntity<>(userRepository.save(newUser), HttpStatus.OK);
+    }
+
+
+    @Operation(summary = "Replace a user with a new user")
+    @PostMapping("/{id}")
+    public ResponseEntity replaceUser(@RequestBody User newUser, @PathVariable Long id) {
+        Optional<User> user = userRepository.findById(id);
+        User u;
+        if(user.isPresent()){
+            User temp = user.get();
+            temp.setUserName(newUser.getUserName());
+            temp.setBoards(newUser.getBoards());
+            temp.setCoordinator(newUser.getCoordinator());
+            temp.setEmail(newUser.getEmail());
+            temp.setPassword(newUser.getPassword());
+            temp.setSupervisor(newUser.getSupervisor());
+            u = userRepository.save(temp);
+        }else{
+            newUser.setId(id);
+            u = userRepository.save(newUser);
+        }
+        return new ResponseEntity<>(u, HttpStatus.OK);
+    }
+
+
+    @Operation(summary = "Delete a user")
+    @DeleteMapping("/")
+    public ResponseEntity addUser(@PathVariable Long id) {
+        userRepository.deleteById(id);
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
 
 }
