@@ -7,9 +7,6 @@ public class WebSocketMessage {
     private String sender;
     private String boardId;
 
-    private User user;
-    private Board board;
-
     public Integer getId() {
         return id;
     }
@@ -48,21 +45,5 @@ public class WebSocketMessage {
 
     public void setBoardId(String boardId) {
         this.boardId = boardId;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Board getBoard() {
-        return board;
-    }
-
-    public void setBoard(Board board) {
-        this.board = board;
     }
 }
