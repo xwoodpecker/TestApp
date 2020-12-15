@@ -23,7 +23,7 @@ public class UserRestController {
         return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
     }
 
-    @Operation(summary = "Get all users")
+    @Operation(summary = "Get user with given id")
     @GetMapping("/{id}")
     public ResponseEntity getUser(@PathVariable Long id) {
         ResponseEntity response;
