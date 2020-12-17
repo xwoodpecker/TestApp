@@ -13,6 +13,7 @@ import java.util.concurrent.*;
  */
 @Component
 public class MessageManager {
+    private Integer idCounter = 0;
     private final Map<Integer, WebSocketMessage> map;
 
     private final List<MessageChangeListener> listeners;
@@ -28,12 +29,13 @@ public class MessageManager {
     /**
      * Add.
      *
-     * @param id  the id
      * @param msg the msg
      */
-    public void add(Integer id, WebSocketMessage msg) {
-        map.put(id, msg);
+    public WebSocketMessage add(WebSocketMessage msg) {
+        msg.setId(++idCounter);
+        map.put(idCounter, msg);
         notifyListeners();
+        return msg;
     }
 
     /**

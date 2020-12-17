@@ -12,4 +12,13 @@ import java.util.List;
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+
+    /**
+     * Find first by user name user.
+     *
+     * @param userName the user name
+     * @return the user
+     */
+    User findFirstByUserName(String userName);
+
 }
