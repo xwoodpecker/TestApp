@@ -32,11 +32,12 @@ public class User {//implements Principal {
     @Column(name = "email")
     private String email;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
-    private Set<Roles> roles = new HashSet<>();
+    @ManyToMany
+    @JoinTable(name = "USERS_ROLES")
+    private Set<Role> roles = new HashSet<>();
 
-    @JoinTable(name = "USER_BOARDS")
     @OneToMany(fetch=FetchType.EAGER)
+    @JoinTable(name = "USERS_BOARDS")
     private Set<Board> boards  = new HashSet<>();
 
     /**
@@ -136,21 +137,11 @@ public class User {//implements Principal {
         this.enabled = enabled;
     }
 
-    /**
-     * Gets roles.
-     *
-     * @return the roles
-     */
-    public Set<Roles> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
     }
 
-    /**
-     * Sets roles.
-     *
-     * @param roles the roles
-     */
-    public void setRoles(Set<Roles> roles) {
+    public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
 

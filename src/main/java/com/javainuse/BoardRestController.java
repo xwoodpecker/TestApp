@@ -80,7 +80,7 @@ public class BoardRestController {
      * @return the response entity
      */
     @Operation(summary = "Change board name")
-    //@Secured("USER_SUPERVISOR")
+    @Secured("ROLE_COORDINATOR")
     @PostMapping("/{id}")
     public ResponseEntity replaceBoard(@RequestBody Board newBoard, @PathVariable Long id) {
         Optional<Board> board = boardRepository.findById(id);

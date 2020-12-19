@@ -11,6 +11,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * The type Web security config.
  */
@@ -48,20 +51,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         try {
             userDetailsService.loadUserByUsername("supervisor");
         } catch (UsernameNotFoundException e) {
-            User admin = new User();
-            admin.setUserName("supervisor");
-            admin.setPassword(passwordEncoder().encode(INITIAL_ADMIN_PASSWORD));
-            admin.setEnabled(true);
-            Roles adminRole = new Roles();
-            Roles userRole = new Roles();
-            adminRole.setUser(admin);
-            userRole.setUser(admin);
+            User supervisor = new User();
+            supervisor.setUserName("supervisor");
+            supervisor.setPassword(passwordEncoder().encode(INITIAL_ADMIN_PASSWORD));
+            supervisor.setEnabled(true);
+            Role adminRole = new Role();
+            Role coordinatorRole = new Role();
+            Role userRole = new Role();
+            adminRole.getUsers().add(supervisor);
+            coordinatorRole.getUsers().add(supervisor);
+            userRole.getUsers().add(supervisor);
             adminRole.setRole("SUPERVISOR");
-            userRole.setRole("COORDINATOR");
+            coordinatorRole.setRole("COORDINATOR");
             userRole.setRole("USER");
-            admin.getRoles().add(adminRole);
-            admin.getRoles().add(userRole);
-            userRepository.save(admin);
+            supervisor.getRoles().add(adminRole);
+            supervisor.getRoles().add(coordinatorRole);
+            supervisor.getRoles().add(userRole);
+            userRepository.save(supervisor);
         }
     }
 

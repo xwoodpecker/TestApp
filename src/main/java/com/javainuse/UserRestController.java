@@ -9,7 +9,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 @Api(tags = {SpringFoxConfig.USER})
 @RestController
@@ -52,13 +55,13 @@ public class UserRestController {
         user.setPassword(passwordEncoder.encode(password));
         user.setEnabled(true);
         user.setEmail(email);
-        Roles userRole = new Roles();
+        Role userRole = new Role();
         userRole.setRole("USER");
         user.getRoles().add(userRole);
         if(isSupervisor){
-            Roles superVisor = new Roles();
-            superVisor.setRole("SUPERVISOR");
-            user.getRoles().add(superVisor);
+            Role superVisorRole = new Role();
+            superVisorRole.setRole("SUPERVISOR");
+            user.getRoles().add(superVisorRole);;
         }
         return new ResponseEntity<>(userRepository.save(user), HttpStatus.OK);
     }
