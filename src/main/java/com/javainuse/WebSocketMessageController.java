@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 public class WebSocketMessageController {
-
+/**
     private final SimpMessagingTemplate simpMessagingTemplate;
     private final MessageManager messageManager;
     roleService
@@ -18,7 +18,7 @@ public class WebSocketMessageController {
         this.simpMessagingTemplate = simpMessagingTemplate;
         this.messageManager = messageManager;
     }
-    /**private final UserRepository userRepository;
+    private final UserRepository userRepository;
     private final BoardRepository boardRepository;**/
 
     /**public WebSocketMessageController(SimpMessagingTemplate simpMessagingTemplate, MessageManager messageManager, UserRepository userRepository, BoardRepository boardRepository) {
@@ -26,7 +26,7 @@ public class WebSocketMessageController {
         this.messageManager = messageManager;
         this.userRepository = userRepository;
         this.boardRepository = boardRepository;
-    }**/
+    }
 
     @PreAuthorize("#username == authentication.principal.username")
     @PreAuthorize("roleService.verify(webSocketMessage.boardId, webSocketMessage.username) and xyz")
@@ -35,7 +35,7 @@ public class WebSocketMessageController {
         /**User user = userRepository.findFirstByUserName(webSocketMessage.getSender());
         webSocketMessage.setUser(user);
         Optional<Board> board = boardRepository.findById(Long.valueOf(webSocketMessage.getBoardId()));
-        webSocketMessage.setBoard(board.get());**/
+        webSocketMessage.setBoard(board.get());
         webSocketMessage = messageManager.add(webSocketMessage);
         simpMessagingTemplate.convertAndSend(
                 CONFIG.BASIC_TOPIC + webSocketMessage.getBoardId(),
@@ -71,6 +71,7 @@ public class WebSocketMessageController {
 
 
     }
+    **/
 
 
 

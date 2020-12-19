@@ -1,6 +1,8 @@
 package com.javainuse;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.security.Principal;
 import java.util.HashSet;
@@ -21,17 +23,20 @@ public class User {//implements Principal {
     @Column(name = "username")
     private String userName;
 
+
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @Column(name = "enabled", nullable = false)
+    private boolean enabled;
+
     @Column(name = "email")
     private String email;
 
-    @Column(name = "password")
-    private String password;
+    @JsonIgnoreProperties
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<Roles> roles = new HashSet<>();
 
-    @Column(name = "is_coordinator")
-    private Boolean isCoordinator;
-
-    @Column(name = "is_supervisor")
-    private Boolean isSupervisor;
 
     @JoinTable(name = "USER_BOARDS")
     @OneToMany(fetch=FetchType.EAGER)
@@ -117,39 +122,39 @@ public class User {//implements Principal {
     }
 
     /**
-     * Gets coordinator.
+     * Is enabled boolean.
      *
-     * @return the coordinator
+     * @return the boolean
      */
-    public Boolean getCoordinator() {
-        return isCoordinator;
+    public boolean isEnabled() {
+        return enabled;
     }
 
     /**
-     * Sets coordinator.
+     * Sets enabled.
      *
-     * @param coordinator the coordinator
+     * @param enabled the enabled
      */
-    public void setCoordinator(Boolean coordinator) {
-        isCoordinator = coordinator;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     /**
-     * Gets supervisor.
+     * Gets roles.
      *
-     * @return the supervisor
+     * @return the roles
      */
-    public Boolean getSupervisor() {
-        return isSupervisor;
+    public Set<Roles> getRoles() {
+        return roles;
     }
 
     /**
-     * Sets supervisor.
+     * Sets roles.
      *
-     * @param supervisor the supervisor
+     * @param roles the roles
      */
-    public void setSupervisor(Boolean supervisor) {
-        isSupervisor = supervisor;
+    public void setRoles(Set<Roles> roles) {
+        this.roles = roles;
     }
 
     /**

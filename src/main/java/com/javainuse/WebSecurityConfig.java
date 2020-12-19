@@ -1,6 +1,5 @@
 package com.javainuse;
 
-import htw.smartcity.aggregator.base.ConfigProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -18,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 {
-    private final String INITIAL_ADMIN_PASSWORD = ConfigProperties.INITIAL_ADMIN_PASSWORD;
+    private final String INITIAL_ADMIN_PASSWORD = "ass";//ConfigProperties.INITIAL_ADMIN_PASSWORD;
 
     private final UserDetailsService userDetailsService;
 
@@ -40,6 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         return new BCryptPasswordEncoder();
     }
 
+    /**
     @Autowired
     public void configure(AuthenticationManagerBuilder auth)
             throws Exception
@@ -71,5 +71,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 .and().authorizeRequests().antMatchers("/swagger**").permitAll()
                 .and().authorizeRequests().anyRequest().authenticated()
                 .and().csrf().disable();
-    }
+    }**/
 }

@@ -52,11 +52,9 @@ public class UserRestController {
         if(user.isPresent()){
             User temp = user.get();
             temp.setUserName(newUser.getUserName());
-            temp.setBoards(newUser.getBoards());
-            temp.setCoordinator(newUser.getCoordinator());
-            temp.setEmail(newUser.getEmail());
             temp.setPassword(newUser.getPassword());
-            temp.setSupervisor(newUser.getSupervisor());
+            temp.setEmail(newUser.getEmail());
+            //TODO
             u = userRepository.save(temp);
         }else{
             newUser.setId(id);
