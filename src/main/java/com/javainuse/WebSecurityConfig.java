@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         return new BCryptPasswordEncoder();
     }
 
-    /**
+
     @Autowired
     public void configure(AuthenticationManagerBuilder auth)
             throws Exception
@@ -49,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
             userDetailsService.loadUserByUsername("admin");
         } catch (UsernameNotFoundException e) {
             User admin = new User();
-            admin.setUsername("admin");
+            admin.setUserName("admin");
             admin.setPassword(passwordEncoder().encode(INITIAL_ADMIN_PASSWORD));
             admin.setEnabled(true);
             Roles adminRole = new Roles();
@@ -71,5 +71,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
                 .and().authorizeRequests().antMatchers("/swagger**").permitAll()
                 .and().authorizeRequests().anyRequest().authenticated()
                 .and().csrf().disable();
-    }**/
+    }
 }

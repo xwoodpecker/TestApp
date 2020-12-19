@@ -33,10 +33,8 @@ public class User {//implements Principal {
     @Column(name = "email")
     private String email;
 
-    @JsonIgnoreProperties
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Roles> roles = new HashSet<>();
-
 
     @JoinTable(name = "USER_BOARDS")
     @OneToMany(fetch=FetchType.EAGER)
