@@ -8,7 +8,7 @@ import java.util.Set;
  * The type Groups.
  */
 @Entity
-@Table(name = "GROUPS")
+@Table(name = "BOARD_GROUPS")
 public class Group {
 
     @Id
@@ -19,11 +19,9 @@ public class Group {
     @OneToMany(fetch = FetchType.EAGER)
     private Set<User> users = new HashSet<>();
 
-    @JoinTable(name = "GROUP_BOARDS")
     @OneToOne(fetch = FetchType.EAGER)
     private Board board;
 
-    @JoinTable(name = "GROUP_COORDINATOR")
     @OneToOne(fetch = FetchType.EAGER)
     private User coordinator;
 
