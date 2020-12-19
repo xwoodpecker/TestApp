@@ -1,7 +1,6 @@
 package com.javainuse;
 
 public class WebSocketChatMessage {
-    private Board board;
     private String type;
     private String content;
     private String sender;
@@ -28,13 +27,5 @@ public class WebSocketChatMessage {
 
     public void setSender(String sender) {
         this.sender = sender;
-    }
-
-    public Board getBoard() {
-        return board;
-    }
-
-    public void setBoard(Board board) {
-        this.board = board;
     }
 }
