@@ -13,6 +13,7 @@ public class SpringFoxConfig {
 
     public static final String USER = "Users";
     public static final String BOARD = "Boards";
+    public static final String GROUP = "Groups";
 
     @Bean
     public Docket api() {
@@ -22,6 +23,7 @@ public class SpringFoxConfig {
                 .paths(PathSelectors.any())
                 .build()
                 .tags(new Tag(USER, "Endpoint to manage users"),
-                        new Tag(BOARD, "Endpoint to manage boards"));
+                        new Tag(BOARD, "Endpoint to manage boards"),
+                        new Tag(GROUP, "Endpoint to manage groups"));
     }
 }

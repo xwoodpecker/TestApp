@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,7 +48,7 @@ public class BoardRestController {
      */
     @Operation(summary = "Get board by given id")
     @GetMapping("/{id}")
-    public ResponseEntity getUser(@PathVariable Long id) {
+    public ResponseEntity getBoard(@PathVariable Long id) {
         ResponseEntity response;
         Optional<Board> board = boardRepository.findById(id);
 
@@ -79,6 +80,7 @@ public class BoardRestController {
      * @return the response entity
      */
     @Operation(summary = "Change board name")
+    @Secured("USER_SUPERVISOR")
     @PostMapping("/{id}")
     public ResponseEntity replaceBoard(@RequestBody Board newBoard, @PathVariable Long id) {
         Optional<Board> board = boardRepository.findById(id);
@@ -101,6 +103,7 @@ public class BoardRestController {
      * @return the response entity
      */
     @Operation(summary = "Delete a board")
+    @Secured("USER_SUPERVISOR")
     @DeleteMapping("/{id}")
     public ResponseEntity deleteBoard(@PathVariable Long id) {
         boardRepository.deleteById(id);
