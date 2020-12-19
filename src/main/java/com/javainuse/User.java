@@ -22,7 +22,6 @@ public class User {//implements Principal {
     @Column(name = "username")
     private String userName;
 
-
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -32,8 +31,7 @@ public class User {//implements Principal {
     @Column(name = "email")
     private String email;
 
-    @ManyToMany
-    @JoinTable(name = "USERS_ROLES")
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "users", fetch = FetchType.EAGER)
     private Set<Role> roles = new HashSet<>();
 
     @OneToMany(fetch=FetchType.EAGER)

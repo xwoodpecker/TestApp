@@ -61,9 +61,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
             adminRole.getUsers().add(supervisor);
             coordinatorRole.getUsers().add(supervisor);
             userRole.getUsers().add(supervisor);
-            adminRole.setRole("SUPERVISOR");
-            coordinatorRole.setRole("COORDINATOR");
-            userRole.setRole("USER");
+            adminRole.setName("SUPERVISOR");
+            coordinatorRole.setName("COORDINATOR");
+            userRole.setName("USER");
             supervisor.getRoles().add(adminRole);
             supervisor.getRoles().add(coordinatorRole);
             supervisor.getRoles().add(userRole);

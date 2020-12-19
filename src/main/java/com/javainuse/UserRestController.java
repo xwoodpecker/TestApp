@@ -56,11 +56,11 @@ public class UserRestController {
         user.setEnabled(true);
         user.setEmail(email);
         Role userRole = new Role();
-        userRole.setRole("USER");
+        userRole.setName("USER");
         user.getRoles().add(userRole);
         if(isSupervisor){
             Role superVisorRole = new Role();
-            superVisorRole.setRole("SUPERVISOR");
+            superVisorRole.setName("SUPERVISOR");
             user.getRoles().add(superVisorRole);;
         }
         return new ResponseEntity<>(userRepository.save(user), HttpStatus.OK);

@@ -10,14 +10,16 @@ import java.util.Set;
 @Entity
 @Table(name = "roles")
 public class Role {
+
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "role")
-    private String role;
+    @Column(name = "name")
+    private String name;
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "USERS_ROLES")
     private Set<User> users = new HashSet<>();
 
     public Long getId() {
@@ -28,22 +30,12 @@ public class Role {
         this.id = id;
     }
 
-    /**
-     * Gets role.
-     *
-     * @return the role
-     */
-    public String getRole() {
-        return role;
+    public String getName() {
+        return name;
     }
 
-    /**
-     * Sets role.
-     *
-     * @param authority the authority
-     */
-    public void setRole(String authority) {
-        this.role = authority;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Set<User> getUsers() {
