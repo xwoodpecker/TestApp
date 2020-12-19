@@ -2,7 +2,6 @@ package com.javainuse;
 
 public class WebSocketMessage {
     private Integer id;
-    private String type;
     private String content;
     private String sender;
     private String boardId;
@@ -13,14 +12,6 @@ public class WebSocketMessage {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getContent() {
