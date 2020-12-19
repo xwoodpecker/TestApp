@@ -17,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 {
-    private final String INITIAL_ADMIN_PASSWORD = "ass";//ConfigProperties.INITIAL_ADMIN_PASSWORD;
+    private final String INITIAL_ADMIN_PASSWORD = CONFIG.DEFAULT_ADMIN_PASSWORD;
 
     private final UserDetailsService userDetailsService;
 
@@ -46,17 +46,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
         try {
-            userDetailsService.loadUserByUsername("admin");
+            userDetailsService.loadUserByUsername("supervisor");
         } catch (UsernameNotFoundException e) {
             User admin = new User();
-            admin.setUserName("admin");
+            admin.setUserName("supervisor");
             admin.setPassword(passwordEncoder().encode(INITIAL_ADMIN_PASSWORD));
             admin.setEnabled(true);
             Roles adminRole = new Roles();
             Roles userRole = new Roles();
             adminRole.setUser(admin);
             userRole.setUser(admin);
-            adminRole.setRole("ADMIN");
+            adminRole.setRole("SUPERVISOR");
+            userRole.setRole("COORDINATOR");
             userRole.setRole("USER");
             admin.getRoles().add(adminRole);
             admin.getRoles().add(userRole);

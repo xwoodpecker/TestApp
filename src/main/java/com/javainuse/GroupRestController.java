@@ -78,7 +78,7 @@ public class GroupRestController {
      * @param id   the id
      * @return the response entity
      */
-    @Operation(summary = "Add user to group")
+    /**@Operation(summary = "Add user to group")
     @PostMapping("/{id}")
     public ResponseEntity addUserToGroup(@RequestBody User user, @PathVariable Long id) {
         ResponseEntity response;
@@ -93,7 +93,7 @@ public class GroupRestController {
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).body("No group found");
         }
         return response;
-    }
+    } **/
 
     /**
      * Add user to group response entity.
@@ -102,7 +102,7 @@ public class GroupRestController {
      * @param id   the id
      * @return the response entity
      */
-    @Operation(summary = "Set Coordinator")
+    /**@Operation(summary = "Set Coordinator")
     @PostMapping("/{id}")
     public ResponseEntity setCoordinator(@RequestBody User user, @PathVariable Long id) {
         ResponseEntity response;
@@ -117,7 +117,7 @@ public class GroupRestController {
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).body("No group found");
         }
         return response;
-    }
+    }**/
 
     /**
      * Delete group response entity.
@@ -126,7 +126,7 @@ public class GroupRestController {
      * @return the response entity
      */
     @Operation(summary = "Delete a group")
-    @Secured("USER_SUPERVISOR")
+    //@Secured("USER_SUPERVISOR")
     @DeleteMapping("/{id}")
     public ResponseEntity deleteGroup(@PathVariable Long id) {
         groupRepository.deleteById(id);

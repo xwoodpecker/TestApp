@@ -15,7 +15,6 @@ import java.util.Set;
 @Table(name = "USERS")
 public class User {//implements Principal {
 
-
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
@@ -195,6 +194,7 @@ public class User {//implements Principal {
     public String toString() {
         return userName;
     }
+
 
     /** for principal
     @Override

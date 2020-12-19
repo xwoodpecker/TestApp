@@ -80,7 +80,7 @@ public class BoardRestController {
      * @return the response entity
      */
     @Operation(summary = "Change board name")
-    @Secured("USER_SUPERVISOR")
+    //@Secured("USER_SUPERVISOR")
     @PostMapping("/{id}")
     public ResponseEntity replaceBoard(@RequestBody Board newBoard, @PathVariable Long id) {
         Optional<Board> board = boardRepository.findById(id);
@@ -103,7 +103,7 @@ public class BoardRestController {
      * @return the response entity
      */
     @Operation(summary = "Delete a board")
-    @Secured("USER_SUPERVISOR")
+    //@Secured("USER_SUPERVISOR")
     @DeleteMapping("/{id}")
     public ResponseEntity deleteBoard(@PathVariable Long id) {
         boardRepository.deleteById(id);
