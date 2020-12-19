@@ -71,6 +71,13 @@ public class GroupRestController {
         return new ResponseEntity<>(groupRepository.save(newGroup), HttpStatus.OK);
     }
 
+    /**
+     * Add user to group response entity.
+     *
+     * @param user the user
+     * @param id   the id
+     * @return the response entity
+     */
     @Operation(summary = "Add user to group")
     @PostMapping("/{id}")
     public ResponseEntity addUserToGroup(@RequestBody User user, @PathVariable Long id) {
@@ -80,6 +87,30 @@ public class GroupRestController {
         if(group.isPresent()){
             Group temp = group.get();
             temp.addUser(user);
+            g = groupRepository.save(temp);
+            response = new ResponseEntity(g, HttpStatus.OK);
+        }else {
+            response = ResponseEntity.status(HttpStatus.NOT_FOUND).body("No group found");
+        }
+        return response;
+    }
+
+    /**
+     * Add user to group response entity.
+     *
+     * @param user the user
+     * @param id   the id
+     * @return the response entity
+     */
+    @Operation(summary = "Set Coordinator")
+    @PostMapping("/{id}")
+    public ResponseEntity setCoordinator(@RequestBody User user, @PathVariable Long id) {
+        ResponseEntity response;
+        Optional<Group> group = groupRepository.findById(id);
+        Group g;
+        if(group.isPresent()){
+            Group temp = group.get();
+            temp.setCoordinator(user);
             g = groupRepository.save(temp);
             response = new ResponseEntity(g, HttpStatus.OK);
         }else {
