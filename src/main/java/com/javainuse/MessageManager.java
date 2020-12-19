@@ -32,6 +32,7 @@ public class MessageManager {
      * @param msg the msg
      */
     public WebSocketMessage add(WebSocketMessage msg) {
+        //todo verify if id is not set
         msg.setId(++idCounter);
         map.put(idCounter, msg);
         notifyListeners();
