@@ -1,6 +1,5 @@
 package com.javainuse;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -8,15 +7,25 @@ import javax.persistence.*;
  * The type Roles.
  */
 @Entity
-@Table(name = "roles")
-@JsonIgnoreProperties(value = "user")
+@Table(name = "ROLES")
 public class Roles {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id;
+
     @Column(name = "role")
     private String role;
 
     @ManyToOne
     private User user;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     /**
      * Gets role.

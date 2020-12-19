@@ -51,7 +51,7 @@ public class UserRestController {
         User u;
         if(user.isPresent()){
             User temp = user.get();
-            temp.setUserName(newUser.getUserName());
+            temp.setUsername(newUser.getUsername());
             temp.setPassword(newUser.getPassword());
             temp.setEmail(newUser.getEmail());
             //TODO
