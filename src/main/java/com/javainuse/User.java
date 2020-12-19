@@ -1,7 +1,10 @@
 package com.javainuse;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +21,7 @@ public class User {//implements Principal {
     private Long id;
 
     @Column(name = "username")
-    private String username;
+    private String userName;
 
 
     @Column(name = "password", nullable = false)
@@ -33,9 +36,9 @@ public class User {//implements Principal {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
     private Set<Roles> roles = new HashSet<>();
 
-   /** @JoinTable(name = "USER_BOARDS")
+    @JoinTable(name = "USER_BOARDS")
     @OneToMany(fetch=FetchType.EAGER)
-    private Set<Board> boards  = new HashSet<>(); **/
+    private Set<Board> boards  = new HashSet<>();
 
     /**
      * Default constructor for JPA only.
@@ -67,8 +70,8 @@ public class User {//implements Principal {
      *
      * @return the userName
      */
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
     /**
@@ -76,8 +79,8 @@ public class User {//implements Principal {
      *
      * @param userName the user name
      */
-    public void setUsername(String userName) {
-        this.username = userName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     /**
@@ -157,40 +160,40 @@ public class User {//implements Principal {
      *
      * @return the boards
      */
-    /**public Set<Board> getBoards() {
+    public Set<Board> getBoards() {
         return boards;
-    } **/
+    }
 
     /**
      * Sets boards.
      *
      * @param boards the boards
      */
-    /**public void setBoards(Set<Board> boards) {
+    public void setBoards(Set<Board> boards) {
         this.boards = boards;
-    } **/
+    }
 
     /**
      * Add to boards.
      *
      * @param board the board
      */
-    /**public void addToBoards(Board board) {
+    public void addToBoards(Board board) {
         this.boards.add(board);
-    } **/
+    }
 
     /**
      * Remove from boards.
      *
      * @param board the board
      */
-    /**public void removeFromBoards(Board board) {
+    public void removeFromBoards(Board board) {
         this.boards.remove(board);
-    } **/
+    }
 
     @Override
     public String toString() {
-        return username;
+        return userName;
     }
 
     /** for principal

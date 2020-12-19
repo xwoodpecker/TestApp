@@ -49,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
             userDetailsService.loadUserByUsername("admin");
         } catch (UsernameNotFoundException e) {
             User admin = new User();
-            admin.setUsername("admin");
+            admin.setUserName("admin");
             admin.setPassword(passwordEncoder().encode(INITIAL_ADMIN_PASSWORD));
             admin.setEnabled(true);
             Roles adminRole = new Roles();
