@@ -126,7 +126,6 @@ public class GroupRestController {
      * @return the response entity
      */
     @Operation(summary = "Delete a group")
-    @Secured("USER_SUPERVISOR")
     @DeleteMapping("/{id}")
     public ResponseEntity deleteGroup(@PathVariable Long id) {
         groupRepository.deleteById(id);
